@@ -1,5 +1,5 @@
 class Property:
-
+    name_taxes = 'Базового налога'
     def __init__(self, worth):
         self.set_worth(worth)
 
@@ -9,6 +9,9 @@ class Property:
         else:
             print('Стоимость должна быть числом больше нуля')
 
+    def __str__(self):
+        return 'размер {}: {}'.format(self.name_taxes, self.get_worth())
+
     def get_worth(self):
         return self.__worth
 
@@ -17,11 +20,21 @@ class Property:
 
 
 class Apartment(Property):
+    name_taxes = 'налога на квартиру'
     def __init__(self, worth):
-        super().__init__(worth)
+        super().__init__(worth),
 
-    def tax_calculation(self):
-        return self.get_worth() / 1000
+    def set_worth(self, worth):
+        if isinstance(worth, int) and worth > 0:
+            self.__worth = worth / 1000
+        else:
+            print('Стоимость должна быть числом больше нуля')
+
+    def __str__(self):
+        return 'размер {}: {}'.format(self.name_taxes, self.get_worth())
+
+    # def tax_calculation(self):
+    #     return self.get_worth() / 1000
 
 
 class Car(Property):
@@ -52,7 +65,7 @@ while True:
 int_worth = int(input('Введите стоимость имущества: '))
 
 worth_apartment = Apartment(int_worth)
-worth_car = Car(int_worth)
-worth_countryHouse = CountryHouse(int_worth)
+# worth_car = Car(int_worth)
+# worth_countryHouse = CountryHouse(int_worth)
 
-print(worth_apartment.tax_calculation())
+print(worth_apartment)
